@@ -28,4 +28,9 @@ export interface RegisterResponseDTO {
   token: string;
 }
 
+export interface LoginResponseDTO {
+  user: UserResponseDTO;
+  token: string;
+}
+
 export { Role };

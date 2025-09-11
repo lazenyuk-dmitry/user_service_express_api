@@ -31,7 +31,7 @@ export async function loginUser(data: LoginDTO): Promise<LoginResponseDTO> {
     message: "Wrong email or password",
   });
 
-  const token = generateToken({ id: user.id, email: user.email, role: user.role });
+  const token = generateToken(publicUser);
 
   return {
     user: publicUser,

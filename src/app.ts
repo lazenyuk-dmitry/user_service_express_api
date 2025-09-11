@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 import authRoutes from "@/modules/auth/auth.routes";
 import usersRoutes from "@/modules/users/users.routes";
 import { errorHandler } from "@/middleware/errorHandler";
+import { authMiddleware } from "./middleware/authMiddleware";
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ app.use(express.json());
 
 app.use(API_BASE_URL, (router => {
   router.use("/auth", authRoutes);
-  router.use("/users", usersRoutes);
+  router.use("/users", authMiddleware, usersRoutes);
   return router;
 })(express.Router()));
 app.use(errorHandler);

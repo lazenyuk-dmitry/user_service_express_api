@@ -14,7 +14,7 @@ export async function getAll(req: Request, res: Response<ApiResponse<PublicUser[
 }
 
 export async function getUser(req: Request, res: Response<ApiResponse<PublicUser>>) {
-  const id = Number(req.body.params.id)
+  const id = Number(req.params.id)
   const user = await getUserById(id)
 
   res.status(200).json({
@@ -25,7 +25,7 @@ export async function getUser(req: Request, res: Response<ApiResponse<PublicUser
 }
 
 export async function blockUser(req: Request, res: Response<ApiResponse<PublicUser>>) {
-  const id = Number(req.body.params.id)
+  const id = Number(req.params.id)
   const loginData = await updateUser(id, { isActive: false });
 
   res.status(200).json({
@@ -36,7 +36,7 @@ export async function blockUser(req: Request, res: Response<ApiResponse<PublicUs
 }
 
 export async function unblockUser(req: Request, res: Response<ApiResponse<PublicUser>>) {
-  const id = Number(req.body.params.id)
+  const id = Number(req.params.id)
   const loginData = await updateUser(id, { isActive: true });
 
   res.status(200).json({

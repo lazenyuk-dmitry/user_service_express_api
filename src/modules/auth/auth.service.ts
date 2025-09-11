@@ -1,9 +1,9 @@
 import prisma from "@/config/db";
 import { RegisterDTO, LoginDTO, Role, RegisterResponseDTO, LoginResponseDTO } from "./auth.types";
-import { hashPassword, comparePasswords } from "@/utils/hash";
+import { comparePasswords } from "@/utils/hash";
 import { generateToken } from "@/utils/jwt";
 import { ApiError } from "@/utils/errors";
-import { addUser, getUserByEmail } from "@/modules/users/users.service";
+import { addUser } from "@/modules/users/users.service";
 
 export async function registerUser(data: RegisterDTO): Promise<RegisterResponseDTO> {
   const user = await addUser(data)

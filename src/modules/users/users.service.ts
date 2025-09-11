@@ -3,6 +3,7 @@ import { Role, PublicUser, UpdateUserDTO } from "./users.types";
 import { hashPassword } from "@/utils/hash";
 import { ApiError } from "@/utils/errors";
 import { RegisterDTO } from "@/modules/auth/auth.types";
+import { Prisma } from "@prisma/client";
 
 const publicUserFields = {
   id: true,
@@ -48,7 +49,7 @@ export async function getUserById(id: number): Promise<PublicUser> {
   });
 
   if (!user) throw new ApiError({
-    status: 400,
+    status: 404,
     message: "User not found",
   });
 
@@ -62,7 +63,7 @@ export async function getUserByEmail(email: string): Promise<PublicUser> {
   });
 
   if (!user) throw new ApiError({
-    status: 400,
+    status: 404,
     message: "User not found",
   });
 
@@ -71,7 +72,6 @@ export async function getUserByEmail(email: string): Promise<PublicUser> {
 
 export async function getAllUsers(): Promise<PublicUser[]> {
   const usersList = await prisma.user.findMany({
-    where: { isActive: true, role: "ADMIN" },
     select: publicUserFields,
   });
 
@@ -79,11 +79,21 @@ export async function getAllUsers(): Promise<PublicUser[]> {
 }
 
 export async function updateUser(id: number, data: UpdateUserDTO): Promise<PublicUser> {
-  const updatedUser = await prisma.user.update({
-    where: { id },
-    data: { isActive: data.isActive, role: data.role },
-    select: publicUserFields
-  });
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: { isActive: data.isActive, role: data.role },
+      select: publicUserFields
+    });
 
-  return updatedUser;
+    return updatedUser;
+  } catch (err: any) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === "P2025") {
+      throw new ApiError({
+        status: 404,
+        message: "User not found",
+      });
+    }
+    throw err;
+  }
 }

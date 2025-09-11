@@ -26,22 +26,22 @@ export async function getUser(req: Request, res: Response<ApiResponse<PublicUser
 
 export async function blockUser(req: Request, res: Response<ApiResponse<PublicUser>>) {
   const id = Number(req.params.id)
-  const loginData = await updateUser(id, { isActive: false });
+  const user = await updateUser(id, { isActive: false });
 
   res.status(200).json({
     status: 200,
-    data: loginData,
+    data: user,
     message: "User blocked",
   });
 }
 
 export async function unblockUser(req: Request, res: Response<ApiResponse<PublicUser>>) {
   const id = Number(req.params.id)
-  const loginData = await updateUser(id, { isActive: true });
+  const user = await updateUser(id, { isActive: true });
 
   res.status(200).json({
     status: 200,
-    data: loginData,
+    data: user,
     message: "User unblocked",
   });
 }

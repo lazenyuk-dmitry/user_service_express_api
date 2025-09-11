@@ -14,4 +14,18 @@ export interface LoginDTO {
   password: string;
 }
 
+export interface UserResponseDTO {
+  id: number;
+  fullName: string;
+  birthDate: Date;
+  email: string;
+  role: Role;
+  isActive: boolean;
+}
+
+export interface RegisterResponseDTO {
+  user: UserResponseDTO;
+  token: string;
+}
+
 export { Role };

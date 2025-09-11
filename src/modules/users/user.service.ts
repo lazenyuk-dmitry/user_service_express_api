@@ -1,10 +1,10 @@
 import prisma from "@/config/db";
-import { RegisterDTO, LoginDTO, Role } from "./user.types";
+import { RegisterDTO, LoginDTO, Role, RegisterResponseDTO } from "./user.types";
 import { hashPassword, comparePasswords } from "@/utils/hash";
 import { generateToken } from "@/utils/jwt";
 import { ApiError } from "@/utils/errors";
 
-export async function registerUser(data: RegisterDTO) {
+export async function registerUser(data: RegisterDTO): Promise<RegisterResponseDTO> {
   const existing = await prisma.user.findUnique({ where: { email: data.email } });
   if (existing) throw new ApiError({
     status: 400,
@@ -24,7 +24,19 @@ export async function registerUser(data: RegisterDTO) {
     },
   });
 
-  return user;
+  const token = generateToken(user);
+
+  return {
+    user: {
+      id: user.id,
+      fullName: user.fullName,
+      birthDate: user.birthDate,
+      email: user.email,
+      role: user.role,
+      isActive: user.isActive,
+    },
+    token,
+  };
 }
 
 export async function loginUser(data: LoginDTO) {

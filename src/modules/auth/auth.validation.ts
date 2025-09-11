@@ -1,6 +1,6 @@
 import { ApiError } from "@/utils/errors";
 import { NextFunction, Request, Response } from "express";
-import { Role } from "./user.types";
+import { Role } from "./auth.types";
 import { z } from "zod";
 
 const registerSchema = z.object({

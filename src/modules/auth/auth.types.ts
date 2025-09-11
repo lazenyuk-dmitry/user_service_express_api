@@ -1,4 +1,5 @@
 import { Role } from "@/config/db";
+import { PublicUser } from "@/modules/users/users.types";
 
 export interface RegisterDTO {
   fullName: string;
@@ -14,22 +15,13 @@ export interface LoginDTO {
   password: string;
 }
 
-export interface UserResponseDTO {
-  id: number;
-  fullName: string;
-  birthDate: Date;
-  email: string;
-  role: Role;
-  isActive: boolean;
-}
-
 export interface RegisterResponseDTO {
-  user: UserResponseDTO;
+  user: PublicUser;
   token: string;
 }
 
 export interface LoginResponseDTO {
-  user: UserResponseDTO;
+  user: PublicUser;
   token: string;
 }
 

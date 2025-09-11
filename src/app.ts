@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
-import userRoutes from "@/modules/users/user.routes";
+import authRoutes from "@/modules/auth/auth.routes";
+import usersRoutes from "@/modules/users/users.routes";
 import { errorHandler } from "@/middleware/errorHandler";
 
 dotenv.config();
@@ -17,7 +18,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use(API_BASE_URL, (router => {
-  router.use("/auth", userRoutes);
+  router.use("/auth", authRoutes);
+  router.use("/users", usersRoutes);
   return router;
 })(express.Router()));
 app.use(errorHandler);

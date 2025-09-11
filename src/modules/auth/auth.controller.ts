@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { registerUser, loginUser } from "./user.service";
-import { LoginResponseDTO, RegisterResponseDTO } from "./user.types";
+import { registerUser, loginUser } from "./auth.service";
+import { LoginResponseDTO, RegisterResponseDTO } from "./auth.types";
 import { ApiResponse } from "@/types/api";
 import { setAuthCookie } from "@/utils/cookie";
 

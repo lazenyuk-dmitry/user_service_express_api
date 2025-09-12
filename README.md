@@ -86,7 +86,7 @@ npm start
 | GET   | /api/v1/users            | админ           | Получение списка пользователей        |
 | PATCH | /api/v1/users/\:id/block | админ / свой ID | Блокировка/разблокировка пользователя |
 
-> JWT передавать через заголовок Authorization: Bearer <token>
+> JWT передавать через заголовок Authorization: Bearer `<token>`
 
 ---
 

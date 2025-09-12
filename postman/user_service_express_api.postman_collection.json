@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "fcc220dd-54d2-4f6f-ab35-475ce3e2882c",
+		"name": "user_service_express_api",
+		"description": "[https://github.com/lazenyuk-dmitry/user_service_express_api](https://github.com/lazenyuk-dmitry/user_service_express_api)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6567003"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Ivan Ivanov\",\r\n  \"birthDate\": \"1992-08-08\",\r\n  \"email\": \"ivan@example.com\",\r\n  \"password\": \"123456789\"\r\n//   \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/{{apiVersion}}/auth/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{apiVersion}}",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"const token = response.data.token;\r",
+									"\r",
+									"if (token) {\r",
+									"    pm.environment.set(\"authToken\", token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin2@example.com\",\r\n  \"password\": \"123456789\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/{{apiVersion}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{apiVersion}}",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Admin Admin\",\r\n  \"birthDate\": \"1995-01-01\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"123456789\",\r\n  \"role\": \"ADMIN\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/{{apiVersion}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{apiVersion}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/:id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Admin Admin\",\r\n  \"birthDate\": \"1995-01-01\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"123456789\",\r\n  \"role\": \"ADMIN\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/{{apiVersion}}/users/7",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/:id/block",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{apiVersion}}/users/block",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"block"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/:id/unblock",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{apiVersion}}/users/18/unblock",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{apiVersion}}",
+								"users",
+								"18",
+								"unblock"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const token = pm.environment.get(\"authToken\");\r",
+							"\r",
+							"if (token) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: `Bearer ${token}`\r",
+							"  });\r",
+							"}\r",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"const tokenCookie = pm.cookies.get(\"token\");\r",
+					"\r",
+					"console.log(tokenCookie)\r",
+					"\r",
+					"if (tokenCookie) {\r",
+					"  pm.request.headers.add({\r",
+					"    key: \"Authorization\",\r",
+					"    value: `Bearer ${tokenCookie}`\r",
+					"  });\r",
+					"}\r",
+					"\r",
+					"console.log('script')"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "apiVersion",
+			"value": "api"
+		}
+	]
+}

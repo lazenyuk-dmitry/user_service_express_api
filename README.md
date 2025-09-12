@@ -63,6 +63,26 @@ npm run migrate:reset
 npm run generate-db:users
 ```
 
+Два доступных пользователя после генерации:
+```javascript
+  {
+    fullName: 'Admin User',
+    birthDate: "1990-01-01",
+    email: 'admin@example.com',
+    password: 123456789,
+    role: 'ADMIN',
+    isActive: true,
+  },
+  {
+    fullName: 'Test User',
+    birthDate: "1995-08-08",
+    email: 'user@example.com',
+    password: 123456789,
+    role: 'USER',
+    isActive: true,
+  },
+```
+
 7. Запуск для разработки:
 ```bash
 npm run dev

@@ -1,4 +1,4 @@
-import { ApiError } from "@/utils/errors";
+import { ValidationError } from "@/utils/errors";
 import { NextFunction, Request, Response } from "express";
 import { Role } from "./auth.types";
 import { z } from "zod";
@@ -22,13 +22,9 @@ export async function validateRegister(
     next();
   } catch (err: any) {
     if(err instanceof z.ZodError) {
-      throw new ApiError({
-        status: 400,
-        message: "Validation error",
-        details: err.issues.map((e: any) => ({ field: e.path[0], message: e.message })),
-      });
+      throw new ValidationError(err);
     }
 
-    throw new ApiError();
+    throw err;
   }
 }

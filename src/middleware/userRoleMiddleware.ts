@@ -9,6 +9,7 @@ export function userRoleMiddleware(role: Role, orSelf = false) {
     next: NextFunction
   ) => {
     const currentUser = req.user;
+    const userId = Number(req.params.id);
 
     if (!currentUser) {
       throw new ApiError({
@@ -17,7 +18,7 @@ export function userRoleMiddleware(role: Role, orSelf = false) {
       });
     }
 
-    if (currentUser.role === role || orSelf) {
+    if (currentUser.role === role || (orSelf && currentUser.id === userId)) {
       next();
     } else {
       throw new ApiError({

@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"fullName\": \"Ivan Ivanov\",\r\n  \"birthDate\": \"1992-08-08\",\r\n  \"email\": \"ivan@example.com\",\r\n  \"password\": \"123456789\"\r\n//   \"role\": \"ADMIN\"\r\n}",
+							"raw": "{\r\n  \"fullName\": \"Ivan Ivanov\",\r\n  \"birthDate\": \"1992-08-08\",\r\n  \"email\": \"ivan@example.com\",\r\n  \"password\": \"123456789-10\"\r\n//   \"role\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,7 +74,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"admin2@example.com\",\r\n  \"password\": \"123456789\"\r\n}"
+							"raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"123456789\"\r\n}"
 						},
 						"url": {
 							"raw": "{{baseURL}}/{{apiVersion}}/auth/login",
@@ -170,14 +170,14 @@
 							"raw": "{\r\n  \"fullName\": \"Admin Admin\",\r\n  \"birthDate\": \"1995-01-01\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"123456789\",\r\n  \"role\": \"ADMIN\"\r\n}"
 						},
 						"url": {
-							"raw": "{{baseURL}}/{{apiVersion}}/users/7",
+							"raw": "{{baseURL}}/{{apiVersion}}/users/1",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"{{apiVersion}}",
 								"users",
-								"7"
+								"1"
 							]
 						}
 					},
@@ -189,13 +189,14 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/{{apiVersion}}/users/block",
+							"raw": "{{baseURL}}/{{apiVersion}}/users/2/block",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"{{apiVersion}}",
 								"users",
+								"2",
 								"block"
 							]
 						}
@@ -208,14 +209,14 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/{{apiVersion}}/users/18/unblock",
+							"raw": "{{baseURL}}/{{apiVersion}}/users/1/unblock",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"{{apiVersion}}",
 								"users",
-								"18",
+								"1",
 								"unblock"
 							]
 						}

@@ -19,8 +19,8 @@ export function authMiddleware(
 
   const token = authHeader.split(" ")[1];
   try {
-    const payload = verifyToken<PublicUser>(token)
-    req.user = payload;
+    const user = verifyToken<PublicUser>(token)
+    req.user = user;
     next();
   } catch {
     throw new ApiError({

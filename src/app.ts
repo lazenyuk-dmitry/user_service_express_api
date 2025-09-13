@@ -14,7 +14,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const API_BASE_URL = process.env.API_BASE_URL || "/api";
+const API_BASE_URL = process.env.API_BASE_URL || "/api/v1";
 
 const app = express();
 const prisma = new PrismaClient();

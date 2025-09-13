@@ -296,7 +296,7 @@
 		},
 		{
 			"key": "apiVersion",
-			"value": "api"
+			"value": "api/v1"
 		}
 	]
 }
